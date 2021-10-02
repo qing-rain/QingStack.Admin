@@ -4,6 +4,7 @@ import {
   createRouter,
   createWebHashHistory,
 } from 'vue-router'
+import type { App } from 'vue'
 // 静态路由
 import homeRouter from './modules/home'
 import loginRouter from './modules/login'
@@ -16,9 +17,10 @@ export const ascending = (arr: any[]) => {
   })
 }
 
-const router: Router = createRouter({
+export const router: Router = createRouter({
   history: createWebHashHistory(),
   routes: ascending(constantRoutes),
+  strict: true,
   scrollBehavior(to, from, savedPosition) {
     return new Promise((resolve) => {
       if (savedPosition) {
@@ -33,4 +35,7 @@ const router: Router = createRouter({
     })
   },
 })
-export default router
+// config router
+export function setupRouter(app: App<Element>) {
+  app.use(router)
+}

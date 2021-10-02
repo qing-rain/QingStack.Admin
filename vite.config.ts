@@ -11,7 +11,8 @@ const pathResolve = (dir: string): any => {
 }
 const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY } = loadEnv()
 const alias: Record<string, string> = {
-  '@': pathResolve('src'),
+  '/@/': pathResolve('src') + '/',
+  '/#/': pathResolve('types') + '/',
 }
 // https://vitejs.dev/config/
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
